@@ -1,7 +1,5 @@
-import MainContainer from "./components/MainContainer";
-
 const App = () => {
-  return <MainContainer />;
+  return <h1>Hello app.js</h1>;
 };
 
 export default App;
