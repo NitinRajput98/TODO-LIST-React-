@@ -7,7 +7,7 @@ const Header = () => {
         <h2 className="font-bold text-2xl">👋 Good Evening</h2>
         <h2 className="font-medium text-xl">date time</h2>
       </div>
-      <h1 className="font-bold text-3xl">TODO Application</h1>
+      <h1 className="font-bold text-3xl">TODO LIST</h1>
       <div className="">
         <ThemeToggleBtn />
       </div>
