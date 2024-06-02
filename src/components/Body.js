@@ -1,12 +1,15 @@
 import { useState } from "react";
 import AddBtn from "./AddBtn";
 import TodoItem from "./TodoItem";
-import todoData from "../mocks/TodoData.json";
+// import todoData from "../mocks/TodoData.json";
 import SearchBar from "./SearchBar";
 import TodoItem from "./TodoItem";
+import CreateTodoForm from "./CreateTodoForm";
 
 const Body = () => {
-  //   const [todoData, setTodoData] = useState([]);
+  const [todoData, setTodoData] = useState([]);
+  const [open, setIsOpen] = useState(false);
+  console.log(todoData, "todoData");
   return (
     <>
       <SearchBar />
@@ -25,9 +28,18 @@ const Body = () => {
             description={item.description}
             key={item.id}
             dueDate={item.dueDate}
+            createdAt={item.createdAt}
           />
         ))}
-        <AddBtn />
+        <AddBtn open={open} setIsOpen={setIsOpen} todoData={todoData} />
+        {open && (
+          <CreateTodoForm
+            showModal={open}
+            setShowModal={setIsOpen}
+            setTodoData={setTodoData}
+            todoData={todoData}
+          />
+        )}
       </div>
     </>
   );
