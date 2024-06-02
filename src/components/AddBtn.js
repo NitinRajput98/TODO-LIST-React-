@@ -6,7 +6,6 @@ const AddBtn = ({ setIsOpen, open, todoData }) => {
         todoData.length === 0 ? `animate-bounce` : `animate-none`
       }`}
       onClick={() => {
-        console.log("Hello", open);
         setIsOpen(!open);
       }}
     >

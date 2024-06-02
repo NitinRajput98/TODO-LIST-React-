@@ -9,11 +9,21 @@ const TodoItem = ({
   todoData,
   setTodoData,
   completed,
+  openEditForm,
+  setOpenEditForm,
+  setEditFormID,
+  updatedAt,
 }) => {
   const handleDelete = () => {
     const result = todoData.filter((item) => item.id != id);
     setTodoData(result);
   };
+
+  const handleEdit = () => {
+    setEditFormID(id);
+    setOpenEditForm(!openEditForm);
+  };
+
   return (
     <div className="w-[80%] border-2 flex justify-around items-center mb-4">
       <CheckBox id={id} todoData={todoData} setTodoData={setTodoData} />
@@ -23,15 +33,28 @@ const TodoItem = ({
           <h2>⏳Created At: {createdAt}</h2>
         </div>
         <h2 className={completed ? `line-through` : ``}>{description}</h2>
-        <h2
-          className={
-            completed
-              ? `line-through flex justify-center items-center gap-2`
-              : `flex justify-center items-center gap-2`
-          }
-        >
-          ⏱️ Due: {dueDate}
-        </h2>
+        <div className="flex justify-between w-full">
+          <h2
+            className={
+              completed
+                ? `line-through flex justify-center items-center gap-2`
+                : `flex justify-center items-center gap-2`
+            }
+          >
+            ⏱️ Due: {dueDate}
+          </h2>
+          {updatedAt && (
+            <h2
+              className={
+                completed
+                  ? `line-through flex justify-center items-center gap-2`
+                  : `flex justify-center items-center gap-2`
+              }
+            >
+              📝 Updated At: {updatedAt}
+            </h2>
+          )}
+        </div>
       </div>
       <div className="flex gap-2">
         <svg
@@ -48,6 +71,7 @@ const TodoItem = ({
           />
         </svg>
         <svg
+          onClick={handleEdit}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"

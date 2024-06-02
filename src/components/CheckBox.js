@@ -11,7 +11,6 @@ const CheckBox = ({ id, todoData, setTodoData }) => {
       }
       return item;
     });
-    console.log(result, result);
     setTodoData(result);
   };
 

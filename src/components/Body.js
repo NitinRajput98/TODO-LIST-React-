@@ -5,6 +5,7 @@ import TodoItem from "./TodoItem";
 import SearchBar from "./SearchBar";
 import TodoItem from "./TodoItem";
 import CreateTodoForm from "./CreateTodoForm";
+import EditTodoForm from "./EditTodoForm";
 
 const Body = () => {
   const [todoData, setTodoData] = useState([
@@ -14,6 +15,7 @@ const Body = () => {
       description:
         "Complete the project proposal for the new client by outlining the objectives, timeline, and budget.",
       dueDate: "2024-06-01",
+      dueDateDefaultFormat: "2024-06-03T00:04",
       createdAt: "2024-06-04",
       priority: "High",
       completed: false,
@@ -24,6 +26,7 @@ const Body = () => {
       description:
         "Conduct a team meeting to discuss the progress of the current projects and address any issues.",
       dueDate: "2024-06-02",
+      dueDateDefaultFormat: "2024-06-03T00:04",
       createdAt: "2024-06-04",
       priority: "Medium",
       completed: false,
@@ -34,6 +37,7 @@ const Body = () => {
       description:
         "Review the code submitted by the junior developers and provide feedback for improvements.",
       dueDate: "2024-06-03",
+      dueDateDefaultFormat: "2024-06-03T00:04",
       createdAt: "2024-06-04",
       priority: "High",
       completed: false,
@@ -44,6 +48,7 @@ const Body = () => {
       description:
         "Follow up with the client regarding the project updates and address any queries they may have.",
       dueDate: "2024-06-04",
+      dueDateDefaultFormat: "2024-06-03T00:04",
       createdAt: "2024-06-04",
       priority: "Low",
       completed: false,
@@ -54,13 +59,15 @@ const Body = () => {
       description:
         "Update the project documentation with the latest changes and improvements made in the project.",
       dueDate: "2024-06-05",
+      dueDateDefaultFormat: "2024-06-03T00:04",
       createdAt: "2024-06-04",
       priority: "Medium",
       completed: false,
     },
   ]);
   const [open, setIsOpen] = useState(false);
-  console.log(todoData, "todoData");
+  const [openEditForm, setOpenEditForm] = useState(false);
+  const [editFormID, setEditFormID] = useState("");
   return (
     <>
       <SearchBar />
@@ -84,6 +91,10 @@ const Body = () => {
             todoData={todoData}
             setTodoData={setTodoData}
             completed={item.completed}
+            openEditForm={openEditForm}
+            setOpenEditForm={setOpenEditForm}
+            setEditFormID={setEditFormID}
+            updatedAt={item?.updatedAt}
           />
         ))}
         <AddBtn open={open} setIsOpen={setIsOpen} todoData={todoData} />
@@ -93,6 +104,15 @@ const Body = () => {
             setShowModal={setIsOpen}
             setTodoData={setTodoData}
             todoData={todoData}
+          />
+        )}
+        {openEditForm && (
+          <EditTodoForm
+            showModal={openEditForm}
+            setShowModal={setOpenEditForm}
+            setTodoData={setTodoData}
+            todoData={todoData}
+            editFormID={editFormID}
           />
         )}
       </div>

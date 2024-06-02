@@ -1,10 +1,17 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const CreateTodoForm = ({ showModal, setShowModal, setTodoData, todoData }) => {
+const EditTodoForm = ({
+  showModal,
+  setShowModal,
+  setTodoData,
+  todoData,
+  editFormID,
+}) => {
   const title = useRef(null);
   const description = useRef(null);
   const deadline = useRef(null);
   const priority = useRef(null);
+  const [currentTaskData, setcurrentTaskData] = useState({});
   const formatDateTime = (datetimeValue) => {
     const date = new Date(datetimeValue);
 
@@ -52,9 +59,6 @@ const CreateTodoForm = ({ showModal, setShowModal, setTodoData, todoData }) => {
     // Format the final string
     return `${hours}:${formattedMinutes} ${ampm}, ${month}/${day}/${year}`;
   };
-  const generateUniqueId = () => {
-    return "id-" + Date.now() + "-" + Math.floor(Math.random() * 10000);
-  };
 
   const validateForm = () => {
     return (
@@ -72,18 +76,22 @@ const CreateTodoForm = ({ showModal, setShowModal, setTodoData, todoData }) => {
     //Validating form input
     if (!validateForm()) return;
     const item = {
-      id: generateUniqueId(),
+      id: editFormID,
       title: title.current.value,
       description: description.current.value,
       dueDate: formatDateTime(deadline.current.value),
       priority: priority.current.value,
-      completed: false,
-      createdAt: getCurrentDateTime(),
-      dueDateDefaultFormat: deadline.current.value,
+      completed: currentTaskData.completed,
+      createdAt: currentTaskData.createdAt,
+      updatedAt: getCurrentDateTime(),
     };
 
     const currentData = [...todoData];
-    currentData.push(item);
+    currentData.splice(
+      currentData.findIndex((item) => item.id === editFormID),
+      1,
+      item
+    );
     //Update Data
     setTodoData(currentData);
 
@@ -95,6 +103,18 @@ const CreateTodoForm = ({ showModal, setShowModal, setTodoData, todoData }) => {
     deadline.current.value = "";
     priority.current.value = "";
   };
+
+  const showEditFormData = () => {
+    const [data] = todoData.filter((item) => item.id === editFormID);
+    title.current.value = data.title;
+    description.current.value = data.description;
+    deadline.current.value = data.dueDateDefaultFormat;
+    priority.current.value = data.priority;
+    setcurrentTaskData(data);
+  };
+  useEffect(() => {
+    showEditFormData();
+  }, []);
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -103,7 +123,7 @@ const CreateTodoForm = ({ showModal, setShowModal, setTodoData, todoData }) => {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col bg-white outline-none focus:outline-none w-[40vw]">
             {/*header*/}
             <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-              <h3 className="text-3xl font-semibold">Add New Task</h3>
+              <h3 className="text-3xl font-semibold">Edit Task</h3>
               <button
                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-9 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
@@ -207,7 +227,7 @@ const CreateTodoForm = ({ showModal, setShowModal, setTodoData, todoData }) => {
                 type="button"
                 onClick={submitForm}
               >
-                Add Task
+                Update Task
               </button>
             </div>
           </div>
@@ -218,4 +238,4 @@ const CreateTodoForm = ({ showModal, setShowModal, setTodoData, todoData }) => {
   );
 };
 
-export default CreateTodoForm;
+export default EditTodoForm;
