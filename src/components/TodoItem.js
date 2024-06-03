@@ -13,10 +13,16 @@ const TodoItem = ({
   setOpenEditForm,
   setEditFormID,
   updatedAt,
+  filteredData,
+  setFilteredData,
+  searchTerm,
+  setSearchTerm,
 }) => {
   const handleDelete = () => {
     const result = todoData.filter((item) => item.id != id);
+    const resultFiltered = filteredData.filter((item) => item.id != id);
     setTodoData(result);
+    setFilteredData(resultFiltered);
   };
 
   const handleEdit = () => {

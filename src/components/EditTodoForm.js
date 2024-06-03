@@ -6,6 +6,10 @@ const EditTodoForm = ({
   setTodoData,
   todoData,
   editFormID,
+  filteredData,
+  setFilteredData,
+  searchTerm,
+  setSearchTerm,
 }) => {
   const title = useRef(null);
   const description = useRef(null);
@@ -84,6 +88,7 @@ const EditTodoForm = ({
       completed: currentTaskData.completed,
       createdAt: currentTaskData.createdAt,
       updatedAt: getCurrentDateTime(),
+      dueDateDefaultFormat: deadline.current.value,
     };
 
     const currentData = [...todoData];
@@ -92,8 +97,15 @@ const EditTodoForm = ({
       1,
       item
     );
+    const currentFilteredData = [...filteredData];
+    currentFilteredData.splice(
+      currentFilteredData.findIndex((item) => item.id === editFormID),
+      1,
+      item
+    );
     //Update Data
     setTodoData(currentData);
+    setFilteredData(currentFilteredData);
 
     //Close Form modal
     setShowModal(false);

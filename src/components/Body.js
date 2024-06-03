@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import TodoItem from "./TodoItem";
 import CreateTodoForm from "./CreateTodoForm";
 import EditTodoForm from "./EditTodoForm";
+import NoResultFoundImg from "../../public/no-results-found.jpg";
 
 const Body = () => {
   const [todoData, setTodoData] = useState([
@@ -65,14 +66,23 @@ const Body = () => {
       completed: false,
     },
   ]);
+  // const [todoData, setTodoData] = useState([]);
+  const [filteredData, setFilteredData] = useState(todoData);
   const [open, setIsOpen] = useState(false);
   const [openEditForm, setOpenEditForm] = useState(false);
   const [editFormID, setEditFormID] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <>
-      <SearchBar />
+      <SearchBar
+        todoData={todoData}
+        filteredData={filteredData}
+        setFilteredData={setFilteredData}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
       <div className="border-2 h-[85vh] flex flex-col justify-center items-center">
-        {todoData.length === 0 && (
+        {todoData.length === 0 && searchTerm === "" && (
           <>
             <h2 className="font-bold text-xl">You don't have any tasks yet</h2>
             <h2 className="font-bold text-xl">
@@ -80,7 +90,16 @@ const Body = () => {
             </h2>
           </>
         )}
-        {todoData.map((item) => (
+        {filteredData.length === 0 && searchTerm !== "" && (
+          <>
+            <h2 className="font-bold text-xl">No tasks found</h2>
+            <h2 className="font-bold text-xl">
+              Try searching with different keywords.
+            </h2>
+            <img className="w-[15%] h-[30%]" src={NoResultFoundImg} />
+          </>
+        )}
+        {filteredData.map((item) => (
           <TodoItem
             title={item.title}
             description={item.description}
@@ -95,6 +114,10 @@ const Body = () => {
             setOpenEditForm={setOpenEditForm}
             setEditFormID={setEditFormID}
             updatedAt={item?.updatedAt}
+            filteredData={filteredData}
+            setFilteredData={setFilteredData}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
           />
         ))}
         <AddBtn open={open} setIsOpen={setIsOpen} todoData={todoData} />
@@ -104,6 +127,9 @@ const Body = () => {
             setShowModal={setIsOpen}
             setTodoData={setTodoData}
             todoData={todoData}
+            setFilteredData={setFilteredData}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
           />
         )}
         {openEditForm && (
@@ -113,6 +139,10 @@ const Body = () => {
             setTodoData={setTodoData}
             todoData={todoData}
             editFormID={editFormID}
+            filteredData={filteredData}
+            setFilteredData={setFilteredData}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
           />
         )}
       </div>
