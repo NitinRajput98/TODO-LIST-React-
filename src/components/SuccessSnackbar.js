@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 
-const SuccessSnackbar = ({
-  snackBarText: text,
-  showSuccessSnackbar,
-  setShowSuccessSnackbar,
-}) => {
+const SuccessSnackbar = ({ snackBarText: text, setShowSuccessSnackbar }) => {
   useEffect(() => {
     setTimeout(() => {
       setShowSuccessSnackbar(false);

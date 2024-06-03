@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
 const EditTodoForm = ({
-  showModal,
   setShowModal,
   setTodoData,
   todoData,
   editFormID,
   filteredData,
   setFilteredData,
-  searchTerm,
-  setSearchTerm,
   setSnackbarText,
   setShowSuccessSnackbar,
 }) => {

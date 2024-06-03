@@ -15,8 +15,6 @@ const TodoItem = ({
   updatedAt,
   filteredData,
   setFilteredData,
-  searchTerm,
-  setSearchTerm,
   setSnackbarText,
   setshowDeleteSnackbar,
   setShowSuccessSnackbar,

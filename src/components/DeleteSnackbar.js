@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 
-const DeleteSnackbar = ({
-  snackBarText: text,
-  showDeleteSnackbar,
-  setshowDeleteSnackbar,
-}) => {
+const DeleteSnackbar = ({ snackBarText: text, setshowDeleteSnackbar }) => {
   useEffect(() => {
     setTimeout(() => {
       setshowDeleteSnackbar(false);

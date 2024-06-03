@@ -82,7 +82,6 @@ const Body = () => {
     <>
       <SearchBar
         todoData={todoData}
-        filteredData={filteredData}
         setFilteredData={setFilteredData}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -130,29 +129,24 @@ const Body = () => {
         <AddBtn open={open} setIsOpen={setIsOpen} todoData={todoData} />
         {open && (
           <CreateTodoForm
-            showModal={open}
             setShowModal={setIsOpen}
             setTodoData={setTodoData}
             todoData={todoData}
             setFilteredData={setFilteredData}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
-            showSuccessSnackbar={showSuccessSnackbar}
             setShowSuccessSnackbar={setShowSuccessSnackbar}
             setSnackbarText={setSnackbarText}
           />
         )}
         {openEditForm && (
           <EditTodoForm
-            showModal={openEditForm}
             setShowModal={setOpenEditForm}
             setTodoData={setTodoData}
             todoData={todoData}
             editFormID={editFormID}
             filteredData={filteredData}
             setFilteredData={setFilteredData}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
             setSnackbarText={setSnackbarText}
             setshowDeleteSnackbar={setshowDeleteSnackbar}
             setShowSuccessSnackbar={setShowSuccessSnackbar}
@@ -161,14 +155,12 @@ const Body = () => {
         {showDeleteSnackbar && (
           <DeleteSnackbar
             snackBarText={snackBarText}
-            showDeleteSnackbar={showDeleteSnackbar}
             setshowDeleteSnackbar={setshowDeleteSnackbar}
           />
         )}
         {showSuccessSnackbar && (
           <SuccessSnackbar
             snackBarText={snackBarText}
-            showSuccessSnackbar={showSuccessSnackbar}
             setShowSuccessSnackbar={setShowSuccessSnackbar}
           />
         )}

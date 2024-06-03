@@ -2,14 +2,12 @@ import { useRef } from "react";
 import { getCurrentDateTime } from "../utils/Common";
 
 const CreateTodoForm = ({
-  showModal,
   setShowModal,
   setTodoData,
   todoData,
   setFilteredData,
   searchTerm,
   setSearchTerm,
-  showSuccessSnackbar,
   setShowSuccessSnackbar,
   setSnackbarText,
 }) => {
