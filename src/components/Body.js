@@ -9,6 +9,7 @@ import EditTodoForm from "./EditTodoForm";
 import NoResultFoundImg from "../../public/no-results-found.jpg";
 import DeleteSnackbar from "./DeleteSnackbar";
 import SuccessSnackbar from "./SuccessSnackbar";
+import DeleteModal from "./DeleteModal";
 
 const Body = () => {
   const [todoData, setTodoData] = useState([
@@ -121,8 +122,6 @@ const Body = () => {
             updatedAt={item?.updatedAt}
             filteredData={filteredData}
             setFilteredData={setFilteredData}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
             setSnackbarText={setSnackbarText}
             setshowDeleteSnackbar={setshowDeleteSnackbar}
             setShowSuccessSnackbar={setShowSuccessSnackbar}
@@ -174,6 +173,7 @@ const Body = () => {
           />
         )}
       </div>
+      <DeleteModal />
     </>
   );
 };
