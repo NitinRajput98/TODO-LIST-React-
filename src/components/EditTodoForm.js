@@ -10,6 +10,8 @@ const EditTodoForm = ({
   setFilteredData,
   searchTerm,
   setSearchTerm,
+  setSnackbarText,
+  setShowSuccessSnackbar,
 }) => {
   const title = useRef(null);
   const description = useRef(null);
@@ -114,6 +116,9 @@ const EditTodoForm = ({
     description.current.value = "";
     deadline.current.value = "";
     priority.current.value = "";
+    //Show Snackbar
+    setSnackbarText("Task updated successfully!");
+    setShowSuccessSnackbar(true);
   };
 
   const showEditFormData = () => {

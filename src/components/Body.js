@@ -7,6 +7,8 @@ import TodoItem from "./TodoItem";
 import CreateTodoForm from "./CreateTodoForm";
 import EditTodoForm from "./EditTodoForm";
 import NoResultFoundImg from "../../public/no-results-found.jpg";
+import DeleteSnackbar from "./DeleteSnackbar";
+import SuccessSnackbar from "./SuccessSnackbar";
 
 const Body = () => {
   const [todoData, setTodoData] = useState([
@@ -72,6 +74,9 @@ const Body = () => {
   const [openEditForm, setOpenEditForm] = useState(false);
   const [editFormID, setEditFormID] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [snackBarText, setSnackbarText] = useState("");
+  const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false);
+  const [showDeleteSnackbar, setshowDeleteSnackbar] = useState(false);
   return (
     <>
       <SearchBar
@@ -118,6 +123,9 @@ const Body = () => {
             setFilteredData={setFilteredData}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
+            setSnackbarText={setSnackbarText}
+            setshowDeleteSnackbar={setshowDeleteSnackbar}
+            setShowSuccessSnackbar={setShowSuccessSnackbar}
           />
         ))}
         <AddBtn open={open} setIsOpen={setIsOpen} todoData={todoData} />
@@ -130,6 +138,9 @@ const Body = () => {
             setFilteredData={setFilteredData}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
+            showSuccessSnackbar={showSuccessSnackbar}
+            setShowSuccessSnackbar={setShowSuccessSnackbar}
+            setSnackbarText={setSnackbarText}
           />
         )}
         {openEditForm && (
@@ -143,6 +154,23 @@ const Body = () => {
             setFilteredData={setFilteredData}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
+            setSnackbarText={setSnackbarText}
+            setshowDeleteSnackbar={setshowDeleteSnackbar}
+            setShowSuccessSnackbar={setShowSuccessSnackbar}
+          />
+        )}
+        {showDeleteSnackbar && (
+          <DeleteSnackbar
+            snackBarText={snackBarText}
+            showDeleteSnackbar={showDeleteSnackbar}
+            setshowDeleteSnackbar={setshowDeleteSnackbar}
+          />
+        )}
+        {showSuccessSnackbar && (
+          <SuccessSnackbar
+            snackBarText={snackBarText}
+            showSuccessSnackbar={showSuccessSnackbar}
+            setShowSuccessSnackbar={setShowSuccessSnackbar}
           />
         )}
       </div>

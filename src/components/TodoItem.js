@@ -17,12 +17,18 @@ const TodoItem = ({
   setFilteredData,
   searchTerm,
   setSearchTerm,
+  setSnackbarText,
+  setshowDeleteSnackbar,
+  setShowSuccessSnackbar,
 }) => {
   const handleDelete = () => {
     const result = todoData.filter((item) => item.id != id);
     const resultFiltered = filteredData.filter((item) => item.id != id);
     setTodoData(result);
     setFilteredData(resultFiltered);
+    //Show Snackbar
+    setSnackbarText("Task deleted Successfully!");
+    setshowDeleteSnackbar(true);
   };
 
   const handleEdit = () => {
@@ -32,7 +38,14 @@ const TodoItem = ({
 
   return (
     <div className="w-[80%] border-2 flex justify-around items-center mb-4">
-      <CheckBox id={id} todoData={todoData} setTodoData={setTodoData} />
+      <CheckBox
+        id={id}
+        todoData={todoData}
+        setTodoData={setTodoData}
+        setSnackbarText={setSnackbarText}
+        setshowDeleteSnackbar={setshowDeleteSnackbar}
+        setShowSuccessSnackbar={setShowSuccessSnackbar}
+      />
       <div className="flex flex-col justify-center items-start flex-2 basis-[85%]">
         <div className="flex justify-between w-full">
           <h2 className={completed ? `line-through` : ``}>{title}</h2>

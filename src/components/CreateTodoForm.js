@@ -9,6 +9,9 @@ const CreateTodoForm = ({
   setFilteredData,
   searchTerm,
   setSearchTerm,
+  showSuccessSnackbar,
+  setShowSuccessSnackbar,
+  setSnackbarText,
 }) => {
   const title = useRef(null);
   const description = useRef(null);
@@ -36,6 +39,10 @@ const CreateTodoForm = ({
 
     // Format the final string
     return `${hours}:${formattedMinutes} ${ampm}, ${month}/${day}/${year}`;
+  };
+
+  const generateUniqueId = () => {
+    return "id-" + Date.now() + "-" + Math.floor(Math.random() * 10000);
   };
 
   const validateForm = () => {
@@ -78,6 +85,9 @@ const CreateTodoForm = ({
     description.current.value = "";
     deadline.current.value = "";
     priority.current.value = "";
+    //Show Snackbar
+    setSnackbarText("Task created successfully!");
+    setShowSuccessSnackbar(true);
   };
   return (
     <>

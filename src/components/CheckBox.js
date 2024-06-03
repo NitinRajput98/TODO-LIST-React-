@@ -1,6 +1,13 @@
 import { useRef, useState } from "react";
 
-const CheckBox = ({ id, todoData, setTodoData }) => {
+const CheckBox = ({
+  id,
+  todoData,
+  setTodoData,
+  setSnackbarText,
+  setshowDeleteSnackbar,
+  setShowSuccessSnackbar,
+}) => {
   const [checked, setChecked] = useState(false);
 
   const handleChange = (e) => {
@@ -12,6 +19,14 @@ const CheckBox = ({ id, todoData, setTodoData }) => {
       return item;
     });
     setTodoData(result);
+    //Show Snackbar
+    if (!checked === false) {
+      setSnackbarText("Task unmarked as complete!");
+      setshowDeleteSnackbar(true);
+    } else {
+      setSnackbarText("Task marked as complete!");
+      setShowSuccessSnackbar(true);
+    }
   };
 
   return (
