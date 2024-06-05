@@ -69,7 +69,6 @@ const CreateTodoForm = ({
       createdAt: getCurrentDateTime(),
       dueDateDefaultFormat: deadline.current.value,
     };
-
     const currentData = [...todoData];
     currentData.push(item);
     //Update Data
