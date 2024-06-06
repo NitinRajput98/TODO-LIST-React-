@@ -1,6 +1,5 @@
 import { useState } from "react";
 import AddBtn from "./AddBtn";
-import TodoItem from "./TodoItem";
 // import todoData from "../mocks/TodoData.json";
 import SearchBar from "./SearchBar";
 import TodoItem from "./TodoItem";
@@ -10,66 +9,68 @@ import NoResultFoundImg from "../../public/no-results-found.jpg";
 import DeleteSnackbar from "./DeleteSnackbar";
 import SuccessSnackbar from "./SuccessSnackbar";
 import DeleteModal from "./DeleteModal";
+import TodoCard from "./TodoCard";
+// import TodoCard from "./TodoCard";
 
 const Body = () => {
-  const [todoData, setTodoData] = useState([
-    {
-      id: 1,
-      title: "Finish Project Proposal",
-      description:
-        "Complete the project proposal for the new client by outlining the objectives, timeline, and budget.",
-      dueDate: "2024-06-01",
-      dueDateDefaultFormat: "2024-06-03T00:04",
-      createdAt: "2024-06-04",
-      priority: "High",
-      completed: false,
-    },
-    {
-      id: 2,
-      title: "Team Meeting",
-      description:
-        "Conduct a team meeting to discuss the progress of the current projects and address any issues.",
-      dueDate: "2024-06-02",
-      dueDateDefaultFormat: "2024-06-03T00:04",
-      createdAt: "2024-06-04",
-      priority: "Medium",
-      completed: false,
-    },
-    {
-      id: 3,
-      title: "Code Review",
-      description:
-        "Review the code submitted by the junior developers and provide feedback for improvements.",
-      dueDate: "2024-06-03",
-      dueDateDefaultFormat: "2024-06-03T00:04",
-      createdAt: "2024-06-04",
-      priority: "High",
-      completed: false,
-    },
-    {
-      id: 4,
-      title: "Client Follow-up",
-      description:
-        "Follow up with the client regarding the project updates and address any queries they may have.",
-      dueDate: "2024-06-04",
-      dueDateDefaultFormat: "2024-06-03T00:04",
-      createdAt: "2024-06-04",
-      priority: "Low",
-      completed: false,
-    },
-    {
-      id: 5,
-      title: "Update Documentation",
-      description:
-        "Update the project documentation with the latest changes and improvements made in the project.",
-      dueDate: "2024-06-05",
-      dueDateDefaultFormat: "2024-06-03T00:04",
-      createdAt: "2024-06-04",
-      priority: "Medium",
-      completed: false,
-    },
-  ]);
-  // const [todoData, setTodoData] = useState([]);
+  // const [todoData, setTodoData] = useState([
+  //   {
+  //     id: 1,
+  //     title: "Finish Project Proposal",
+  //     description:
+  //       "Complete the project proposal for the new client by outlining the objectives, timeline, and budget.",
+  //     dueDate: "2024-06-01",
+  //     dueDateDefaultFormat: "2024-06-03T00:04",
+  //     createdAt: "2024-06-04",
+  //     priority: "High",
+  //     completed: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Team Meeting",
+  //     description:
+  //       "Conduct a team meeting to discuss the progress of the current projects and address any issues.",
+  //     dueDate: "2024-06-02",
+  //     dueDateDefaultFormat: "2024-06-03T00:04",
+  //     createdAt: "2024-06-04",
+  //     priority: "Medium",
+  //     completed: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Code Review",
+  //     description:
+  //       "Review the code submitted by the junior developers and provide feedback for improvements.",
+  //     dueDate: "2024-06-03",
+  //     dueDateDefaultFormat: "2024-06-03T00:04",
+  //     createdAt: "2024-06-04",
+  //     priority: "High",
+  //     completed: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Client Follow-up",
+  //     description:
+  //       "Follow up with the client regarding the project updates and address any queries they may have.",
+  //     dueDate: "2024-06-04",
+  //     dueDateDefaultFormat: "2024-06-03T00:04",
+  //     createdAt: "2024-06-04",
+  //     priority: "Low",
+  //     completed: false,
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "Update Documentation",
+  //     description:
+  //       "Update the project documentation with the latest changes and improvements made in the project.",
+  //     dueDate: "2024-06-05",
+  //     dueDateDefaultFormat: "2024-06-03T00:04",
+  //     createdAt: "2024-06-04",
+  //     priority: "Medium",
+  //     completed: false,
+  //   },
+  // ]);
+  const [todoData, setTodoData] = useState([]);
   const [filteredData, setFilteredData] = useState(todoData);
   const [open, setIsOpen] = useState(false);
   const [openEditForm, setOpenEditForm] = useState(false);
@@ -86,7 +87,13 @@ const Body = () => {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
       />
-      <div className="border-2 h-[85vh] flex flex-col justify-center items-center">
+      <div
+        className={
+          todoData.length === 0 && searchTerm === ""
+            ? "min-h-[70vh] border-2 flex flex-col justify-center items-center gap-2 flex-wrap"
+            : "border-2 flex flex-row justify-center items-center gap-7 flex-wrap"
+        }
+      >
         {todoData.length === 0 && searchTerm === "" && (
           <>
             <h2 className="font-bold text-xl">You don't have any tasks yet</h2>
@@ -105,7 +112,7 @@ const Body = () => {
           </>
         )}
         {filteredData.map((item) => (
-          <TodoItem
+          <TodoCard
             title={item.title}
             description={item.description}
             key={item.id}
@@ -165,7 +172,7 @@ const Body = () => {
           />
         )}
       </div>
-      <DeleteModal />
+      {/* <DeleteModal /> */}
     </>
   );
 };
