@@ -22,7 +22,7 @@ const SearchBar = ({
   };
 
   return (
-    <div className="flex items-center justify-center mt-10">
+    <div className="flex items-center justify-center">
       <div className="relative w-full max-w-md">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <svg

@@ -26,12 +26,12 @@ const Header = () => {
     <nav className="flex justify-between items-center">
       <div>
         <h2 className="font-bold text-2xl">👋 {greeting}</h2>
-        <h2 className="font-medium text-base italic">
+        <h2 className="font-medium text-base italic basis-[32%]">
           Current Date & Time: {currentDataTime}
         </h2>
       </div>
       <h1 className="font-bold text-3xl">TODO LIST</h1>
-      <div className="">
+      <div className="tooltip tooltip-right" data-tip="hello">
         <ThemeToggleBtn />
       </div>
     </nav>

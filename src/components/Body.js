@@ -10,6 +10,8 @@ import DeleteSnackbar from "./DeleteSnackbar";
 import SuccessSnackbar from "./SuccessSnackbar";
 import DeleteModal from "./DeleteModal";
 import TodoCard from "./TodoCard";
+import FilterDropdown from "./FilterDropdown";
+import RadialProgress from "./RadialProgress";
 // import TodoCard from "./TodoCard";
 
 const Body = () => {
@@ -81,15 +83,23 @@ const Body = () => {
   const [showDeleteSnackbar, setshowDeleteSnackbar] = useState(false);
   return (
     <>
-      <SearchBar
-        todoData={todoData}
-        setFilteredData={setFilteredData}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
+      {todoData.length > 0 && (
+        <div className="flex justify-center items-center border p-2">
+          <RadialProgress todoData={todoData} />
+        </div>
+      )}
+      <div className="flex justify-between mt-10">
+        <SearchBar
+          todoData={todoData}
+          setFilteredData={setFilteredData}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
+        <FilterDropdown />
+      </div>
       <div
         className={
-          todoData.length === 0 && searchTerm === ""
+          todoData.length === 0 && (searchTerm === "" || searchTerm !== "")
             ? "min-h-[70vh] border-2 flex flex-col justify-center items-center gap-2 flex-wrap"
             : "border-2 flex flex-row justify-center items-center gap-7 flex-wrap"
         }
