@@ -4,7 +4,7 @@ const AddBtn = ({ setIsOpen, open, todoData }) => {
       className={`tooltip top-[85%] right-[10%] fixed tooltip-right p-2.5 me-2 rounded-full inline-flex items-center ${
         todoData.length === 0 ? `animate-bounce` : `animate-none`
       }`}
-      data-tip="hello"
+      data-tip="Add Task"
     >
       <button
         type="button"
